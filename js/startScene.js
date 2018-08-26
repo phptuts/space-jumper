@@ -4,7 +4,7 @@ let startScene = new Phaser.Scene('Start');
 // Runs second and is used to set all the images used in the game
 startScene.preload = () => {
 
-	startScene.load.image('background', '/assets/images/background.jpg');
+	startScene.load.image('background', 'assets/images/background.jpg');
 
 };
 

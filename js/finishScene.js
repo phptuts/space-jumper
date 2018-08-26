@@ -11,7 +11,7 @@ finishScene.init = (sceneConfig) => {
 // Runs second and is used to set all the images used in the game
 finishScene.preload = (sceneConfig) => {
 
-	finishScene.load.image('background', '/assets/images/background.jpg');
+	finishScene.load.image('background', 'assets/images/background.jpg');
 };	
 
 finishScene.create = () => {

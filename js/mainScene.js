@@ -42,26 +42,26 @@ mainScene.init = () => {
 // Runs second and is used to set all the images used in the game
 mainScene.preload = () => {
 
-	mainScene.load.image('background', '/assets/images/background.jpg');
+	mainScene.load.image('background', 'assets/images/background.jpg');
 
 	mainScene.load.atlas(
 		'items', 
-		'/assets/images/items_spritesheet.png', 
-		'/assets/sprite-data/items_spritesheet.json'
+		'assets/images/items_spritesheet.png', 
+		'assets/sprite-data/items_spritesheet.json'
 	);
 
 	mainScene
 		.load.atlas(
 		'bricks', 
-		'/assets/images/tiles_spritesheet.png', 
-		'/assets/sprite-data/tiles_spritesheet.json'
+		'assets/images/tiles_spritesheet.png', 
+		'assets/sprite-data/tiles_spritesheet.json'
 	);
 
 	mainScene
 		.load
 		.atlas('player',
-			   '/assets/images/p2_walk.png', 
-			   '/assets/sprite-data/p2_walk.json'
+			   'assets/images/p2_walk.png', 
+			   'assets/sprite-data/p2_walk.json'
 			  );
 
 };
