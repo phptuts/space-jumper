@@ -123,37 +123,11 @@ mainScene.create = () =>  {
 	mainScene.physics.add.collider([mainScene.player], mainScene.platforms);
 	mainScene.physics.add.collider([mainScene.coins], mainScene.platforms);
 	mainScene.cursors = mainScene.input.keyboard.createCursorKeys();
-
-	mainScene.input.keyboard.on('keydown', function (event) { 
-
-		if (event.code == 'ArrowLeft' ) {
-			mainScene.startPlayerAnimation();	
-			mainScene.player.body.setVelocityX(-200);
-			mainScene.player.flipX = true;
-			mainScene.continueLeft = true;
-		} 
-		else if (event.code == 'ArrowRight' ) {
-			mainScene.startPlayerAnimation();	
-			mainScene.player.body.setVelocityX(200);
-			mainScene.player.flipX = false;
-			mainScene.continueRight = true;
-		} 
-		else if (event.code == 'ArrowUp'  && mainScene.player.body.touching.down ) {
-			mainScene.player.body.setVelocityY(-800);
-			mainScene.player.setFrame(9);
-			mainScene.player.anims.stop('player_move');	
-		}
-	});
 	
-	mainScene.input.keyboard.on('keyup', function (event) { 
-		if (event.code == 'ArrowLeft' || event.code == 'ArrowRight' ) {
-			mainScene.player.body.setVelocityX(0);
-			mainScene.player.setFrame(9);
-			mainScene.continueRight = false;
-			mainScene.continueLeft = false;
-			mainScene.player.anims.stop('player_move');	
-		}
-	});
+	mainScene.cursors.left.reset();
+	mainScene.cursors.right.reset();
+	mainScene.cursors.up.reset();
+	mainScene.cursors.down.reset();
 
 
 	mainScene.setUp();
@@ -210,13 +184,34 @@ mainScene.hitCoins = (player, coin) => {
 // This may run 60 times per second and is the last thing that is ran
 mainScene.update = () =>  {
 
-	if (mainScene.continueLeft) {
-		mainScene.player.setVelocityX(-200);
+
+	
+	if (mainScene.cursors.left.isDown) {
+		mainScene.startPlayerAnimation();	
+		mainScene.player.body.setVelocityX(-200);
+		mainScene.player.flipX = true;
 	} 
 	
-	if (mainScene.continueRight) {
-		mainScene.player.setVelocityX(200);
+	if(mainScene.cursors.right.isDown) {
+		mainScene.startPlayerAnimation();	
+		mainScene.player.body.setVelocityX(200);
+		mainScene.player.flipX = false;
+	} 
+	if (mainScene.cursors.up.isDown && mainScene.player.body.touching.down) {
+		mainScene.player.body.setVelocityY(-700);
+		mainScene.player.setFrame(9);
+		mainScene.player.anims.stop('player_move');	
+	} 
+	
+	if (mainScene.cursors.up.isUp && 
+		mainScene.cursors.right.isUp && 
+		mainScene.cursors.left.isUp){
+		mainScene.player.body.setVelocityX(0);
+		mainScene.player.setFrame(9);
+		console.log('here');
+		mainScene.player.anims.stop('player_move');	
 	}
+	
 	
 	let lowestTile = mainScene.platforms.getChildren().sort((a, b) => (a.y - b.y))[0];
 	if (lowestTile.y >= 100) {
@@ -227,6 +222,7 @@ mainScene.update = () =>  {
 		mainScene.gameOver = true;
 		mainScene.coins.clear();
 		mainScene.platforms.clear();
+		mainScene.cursors = null;
 		mainScene.scene.start('Finish', {score: mainScene.score});
 	}
 
