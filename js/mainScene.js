@@ -197,7 +197,12 @@ mainScene.update = () =>  {
 		mainScene.player.body.setVelocityX(200);
 		mainScene.player.flipX = false;
 	} 
-	if (mainScene.cursors.up.isDown && mainScene.player.body.touching.down) {
+	
+	console.log((mainScene.boxSpeed + 10) > mainScene.player.body.velocity.y);
+	
+	if (mainScene.cursors.up.isDown &&
+		mainScene.player.body.touching.down && 
+	    (mainScene.boxSpeed + 10) > mainScene.player.body.velocity.y) {
 		mainScene.player.body.setVelocityY(-700);
 		mainScene.player.setFrame(9);
 		mainScene.player.anims.stop('player_move');	
@@ -233,8 +238,6 @@ mainScene.startPlayerAnimation = () => {
 		mainScene.player.anims.play('player_move');	
 	}
 }
-
-
 
 
 

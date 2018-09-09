@@ -28,6 +28,11 @@ finishScene.create = () => {
 	finishScene.startNewGame.on('pointerdown', (pointer, localX, localY) => {
 		finishScene.scene.start('Main');
 	});
+	
+	finishScene.input.keyboard.on('keyup_UP',  (event) => {
+		console.log('changing scene');
+		finishScene.scene.start('Main');
+	});
 };
 
 finishScene.centerX = (text) => {

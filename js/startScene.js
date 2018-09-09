@@ -10,15 +10,20 @@ startScene.preload = () => {
 
 startScene.create = () => {
 	startScene.add.sprite(0,0, 'background').setOrigin(0);
-	startScene.startText = startScene.add.text(80, 300, 'Start Game', fontStyle);
+	startScene.startText = startScene.add.text(80, 400, 'Start Game', fontStyle);
 	startScene.startText.setInteractive();
 	startScene.startText.on('pointerdown', (pointer, localX, localY) => {
 		console.log('changing scene');
 		startScene.scene.start('Main');
 	});
 	
-	
+ startScene.input.keyboard.on('keyup_UP',  (event) => {
+
+		console.log('changing scene');
+		startScene.scene.start('Main');
+
+});
 	
 	startScene.directions = startScene.add.text(0, 200, 
-												' Use the arrow keys to move\n the player around. Try to\n collect as many coins as you can without hitting\n without hitting the floor.', { fontSize: '20px', fill: '#fff', backgroundColor: '#000', padding: 2});
+												' Use the arrow keys to move\n the player around. Try to\n collect as many coins as you can without hitting\n without hitting the floor.\n You can start the game by \n pressing the up key or \n clicking the start game text.', { fontSize: '20px', fill: '#fff', backgroundColor: '#000', padding: 2});
 };
